@@ -21,7 +21,7 @@ public class OrderTest extends BaseTest {
         this.comment = comment;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters(name = "Создание заказа самоката. Тестовые данные: {0}, {1}, {2}, {3}, {4}")
     public static Object[][] getOrderInfo() {
         return new Object[][]{
                 {"Иван", "Петров", "ул. Мира, 1", "+7912346789", "Не звонить в домофон"},
@@ -35,21 +35,7 @@ public class OrderTest extends BaseTest {
         mainPage.clickOrderButton();
 
         MakeAnOrderPage makeAnOrderPage = new MakeAnOrderPage(driver);
-        makeAnOrderPage.fillNameField(name);
-        makeAnOrderPage.fillSurnameField(surname);
-        makeAnOrderPage.fillAddressField(address);
-        makeAnOrderPage.clickMetroStationField();
-        makeAnOrderPage.clickDropDownMetroStationButton();
-        makeAnOrderPage.fillPhoneNumberField(phoneNumber);
-        makeAnOrderPage.clickNextButton();
-        makeAnOrderPage.clickCalendarField();
-        makeAnOrderPage.clickDateButton();
-        makeAnOrderPage.clickTimeOfOrderField();
-        makeAnOrderPage.clickTimeOfOrderButton();
-        makeAnOrderPage.clickBlackColourOFScooterCheckBox();
-        makeAnOrderPage.fillCommentField(comment);
-        makeAnOrderPage.clickMakeAnOrderButton();
-        makeAnOrderPage.clickYesButton();
+        makeAnOrderPage.login(name, surname, address, phoneNumber, comment);
         makeAnOrderPage.checkSuccessfulOrderWindow();
     }
 
@@ -59,21 +45,7 @@ public class OrderTest extends BaseTest {
         mainPage.clickMiddleOrderButton();
 
         MakeAnOrderPage makeAnOrderPage = new MakeAnOrderPage(driver);
-        makeAnOrderPage.fillNameField(name);
-        makeAnOrderPage.fillSurnameField(surname);
-        makeAnOrderPage.fillAddressField(address);
-        makeAnOrderPage.clickMetroStationField();
-        makeAnOrderPage.clickDropDownMetroStationButton();
-        makeAnOrderPage.fillPhoneNumberField(phoneNumber);
-        makeAnOrderPage.clickNextButton();
-        makeAnOrderPage.clickCalendarField();
-        makeAnOrderPage.clickDateButton();
-        makeAnOrderPage.clickTimeOfOrderField();
-        makeAnOrderPage.clickTimeOfOrderButton();
-        makeAnOrderPage.clickBlackColourOFScooterCheckBox();
-        makeAnOrderPage.fillCommentField(comment);
-        makeAnOrderPage.clickMakeAnOrderButton();
-        makeAnOrderPage.clickYesButton();
+        makeAnOrderPage.login(name, surname, address, phoneNumber, comment);
         makeAnOrderPage.checkSuccessfulOrderWindow();
     }
 }

@@ -30,6 +30,11 @@ public class MakeAnOrderPage {
     private By makeAnOrderButton = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
     private By yesButton = By.xpath(".//button[text()='Да']");
     private By successfulOrderWindow = By.xpath(".//div[@class='Order_ModalHeader__3FDaJ']");
+    public void clickButton(By button) {
+        new WebDriverWait(driver, 5)
+                .until(ExpectedConditions.elementToBeClickable(button));
+        driver.findElement(button).click();
+    }
 
     public void fillNameField(String name){
         new WebDriverWait(driver, 5)
@@ -55,9 +60,7 @@ public class MakeAnOrderPage {
         driver.findElement(nextButton).click();
     }
     public void clickCalendarField(){
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.elementToBeClickable(calendarField));
-        driver.findElement(calendarField).click();
+        clickButton(calendarField);
     }
     public void clickDateButton(){
         driver.findElement(dateButton).click();
@@ -78,9 +81,23 @@ public class MakeAnOrderPage {
         driver.findElement(makeAnOrderButton).click();
     }
     public void clickYesButton(){
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.elementToBeClickable(yesButton));
-        driver.findElement(yesButton).click();
+        clickButton(yesButton);
+    }
+    public void login(String name, String surname, String address, String phoneNumber, String comment) {
+        fillNameField(name);
+        fillSurnameField(surname);
+        clickMetroStationField();
+        clickDropDownMetroStationButton();
+        fillPhoneNumberField(phoneNumber);
+        clickNextButton();
+        clickCalendarField();
+        clickDateButton();
+        clickTimeOfOrderField();
+        clickTimeOfOrderButton();
+        clickBlackColourOFScooterCheckBox();
+        fillCommentField(comment);
+        clickMakeAnOrderButton();
+        clickYesButton();
     }
     public void checkSuccessfulOrderWindow(){
         new WebDriverWait(driver, 5)

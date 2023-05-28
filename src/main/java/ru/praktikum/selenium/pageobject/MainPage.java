@@ -34,93 +34,66 @@ public class MainPage {
        private By seventhAnswer = By.xpath(".//div[@id='accordion__panel-6']/p");
        private By eighthAnswer = By.xpath(".//div[@id='accordion__panel-7']/p");
 
+
+        public void clickButton(By button) {
+        WebElement element = driver.findElement(button);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
+        driver.findElement(button).click();
+       }
+        public void checkVisibilityAnswer(By answer) {
+        new WebDriverWait(driver, 5)
+                .until(ExpectedConditions.visibilityOfElementLocated(answer));
+       }
+        public String getActualText(By answer) {
+        return driver.findElement(answer).getText();
+       }
+
+
        public void clickOrderButton() {
            driver.findElement(orderButton).click();
        }
        public void clickMiddleOrderButton() {
-           WebElement element = driver.findElement(middleOrderButton);
-           ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-           driver.findElement(middleOrderButton).click();
+           clickButton(middleOrderButton);
        }
-       public void checkFirstAnswer() {
-           WebElement element = driver.findElement(firstQuestion);
-           ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-           driver.findElement(firstQuestion).click();
-           new WebDriverWait(driver, 5)
-                   .until(ExpectedConditions.visibilityOfElementLocated(firstAnswer));
-           String expected = "Сутки — 400 рублей. Оплата курьеру — наличными или картой.";
-           String actual = driver.findElement(firstAnswer).getText();
-           assertEquals(expected, actual);
-       }
-    public void checkSecondAnswer() {
-        WebElement element = driver.findElement(secondQuestion);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-        driver.findElement(secondQuestion).click();
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.visibilityOfElementLocated(secondAnswer));
-        String expected = "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим.";
-        String actual = driver.findElement(secondAnswer).getText();
-        assertEquals(expected, actual);
+       public void checkFirstAnswer(String firstAnswerText) {
+           clickButton(firstQuestion);
+           checkVisibilityAnswer(firstAnswer);
+           assertEquals(firstAnswerText, getActualText(firstAnswer));
+        }
+    public void checkSecondAnswer(String secondAnswerText) {
+        clickButton(secondQuestion);
+        checkVisibilityAnswer(secondAnswer);
+        assertEquals(secondAnswerText, getActualText(secondAnswer));
     }
-    public void checkThirdAnswer() {
-        WebElement element = driver.findElement(thirdQuestion);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-        driver.findElement(thirdQuestion).click();
-        new WebDriverWait(driver, 5)
-                                                 .until(ExpectedConditions.visibilityOfElementLocated(thirdAnswer));
-        String expected = "Допустим, вы оформляете заказ на 8 мая. Мы привозим самокат 8 мая в течение дня. Отсчёт времени аренды начинается с момента, когда вы оплатите заказ курьеру. Если мы привезли самокат 8 мая в 20:30, суточная аренда закончится 9 мая в 20:30.";
-        String actual = driver.findElement(thirdAnswer).getText();
-        assertEquals(expected, actual);
+    public void checkThirdAnswer(String thirdAnswerText) {
+        clickButton(thirdQuestion);
+        checkVisibilityAnswer(thirdAnswer);
+        assertEquals(thirdAnswerText, getActualText(thirdAnswer));
     }
-    public void checkFourthAnswer() {
-        WebElement element = driver.findElement(fourthQuestion);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-        driver.findElement(fourthQuestion).click();
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.visibilityOfElementLocated(fourthAnswer));
-        String expected = "Только начиная с завтрашнего дня. Но скоро станем расторопнее.";
-        String actual = driver.findElement(fourthAnswer).getText();
-        assertEquals(expected, actual);
+    public void checkFourthAnswer(String fourthAnswerText) {
+        clickButton(fourthQuestion);
+        checkVisibilityAnswer(fourthAnswer);
+        assertEquals(fourthAnswerText, getActualText(fourthAnswer));
     }
-    public void checkFifthAnswer() {
-        WebElement element = driver.findElement(fifthQuestion);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-        driver.findElement(fifthQuestion).click();
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.visibilityOfElementLocated(fifthAnswer));
-        String expected = "Пока что нет! Но если что-то срочное — всегда можно позвонить в поддержку по красивому номеру 1010.";
-        String actual = driver.findElement(fifthAnswer).getText();
-        assertEquals(expected, actual);
+    public void checkFifthAnswer(String fifthAnswerText) {
+        clickButton(fifthQuestion);
+        checkVisibilityAnswer(fifthAnswer);
+        assertEquals(fifthAnswerText, getActualText(fifthAnswer));
     }
-    public void checkSixthAnswer() {
-        WebElement element = driver.findElement(sixthQuestion);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-        driver.findElement(sixthQuestion).click();
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.visibilityOfElementLocated(sixthAnswer));
-        String expected = "Самокат приезжает к вам с полной зарядкой. Этого хватает на восемь суток — даже если будете кататься без передышек и во сне. Зарядка не понадобится.";
-        String actual = driver.findElement(sixthAnswer).getText();
-        assertEquals(expected, actual);
+    public void checkSixthAnswer(String sixthAnswerText) {
+        clickButton(sixthQuestion);
+        checkVisibilityAnswer(sixthAnswer);
+        assertEquals(sixthAnswerText, getActualText(sixthAnswer));
     }
-    public void checkSeventhAnswer() {
-        WebElement element = driver.findElement(seventhQuestion);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-        driver.findElement(seventhQuestion).click();
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.visibilityOfElementLocated(seventhAnswer));
-        String expected = "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.";
-        String actual = driver.findElement(seventhAnswer).getText();
-        assertEquals(expected, actual);
+    public void checkSeventhAnswer(String seventhAnswerText) {
+        clickButton(seventhQuestion);
+        checkVisibilityAnswer(seventhAnswer);
+        assertEquals(seventhAnswerText, getActualText(seventhAnswer));
     }
-    public void checkEighthAnswer() {
-        WebElement element = driver.findElement(eighthQuestion);
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", element);
-        driver.findElement(eighthQuestion).click();
-        new WebDriverWait(driver, 5)
-                .until(ExpectedConditions.visibilityOfElementLocated(eighthAnswer));
-        String expected = "Да, обязательно. Всем самокатов! И Москве, и Московской области.";
-        String actual = driver.findElement(eighthAnswer).getText();
-        assertEquals(expected, actual);
+    public void checkEighthAnswer(String eighthAnswerText) {
+        clickButton(eighthQuestion);
+        checkVisibilityAnswer(eighthQuestion);
+        assertEquals(eighthAnswerText, getActualText(eighthAnswer));
     }
 }
 
